@@ -11,7 +11,7 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 wei-single = "0.3.5"
 wei-run = { path = "../wei-run" }
-wei-windows ={ path = "../wei-windows" }
 tokio = { version = "1", features = ["full"] }
+regex = "1"
 axum = "0.6.20"
 tower-http = { version = "0.4.4", features = ["full"] } #"cors", "fs", "add_extension"

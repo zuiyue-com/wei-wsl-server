@@ -7,5 +7,8 @@ pub async fn index(Json(data): Json<Vec<String>>) -> String {
         return "error: command is empty".to_string();
     }
 
-    wei_run::command(command[0], (&command[1..]).to_vec()).unwrap()
+    match wei_run::command(command[0], (&command[1..]).to_vec()) {
+        Ok(output) => output,
+        Err(e) => format!("{}", e),
+    }
 }
