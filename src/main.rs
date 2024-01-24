@@ -39,7 +39,8 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 绑定port端口
     let address = format!("0.0.0.0:{}", port);
 
-    println!("Server running on {}", address);
+    // println!("Server running on {}", address);
+    
     axum::Server::bind(&address.parse()?)
         .serve(app.into_make_service())
         .await?;
