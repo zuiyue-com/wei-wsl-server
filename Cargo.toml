@@ -9,7 +9,7 @@ homepage = "https://github.com/zuiyue-com/wei-wsl-server"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-wei-single = "0.3.5"
+# wei-single = "0.3.5"
 wei-run = { path = "../wei-run" }
 tokio = { version = "1", features = ["full"] }
 regex = "1"

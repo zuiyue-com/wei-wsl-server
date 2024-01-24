@@ -1,21 +1,16 @@
-use wei_single::SingleInstance;
+// use wei_single::SingleInstance;
 use regex::Regex;
 
 mod routes;
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 20)]
 pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let instance = SingleInstance::new("wei-wsl-server")?;
-    if !instance.is_single() { 
-        std::process::exit(0);
-    };
-
-    let mut port = 51115;
+    let port = 1115;
 
     // 循环查找可用端口
-    while !is_port_available(port) {
-        port += 1;
-    }
+    // while !is_port_available(port) {
+    //     port += 1;
+    // }
 
     let output = std::process::Command::new("ifconfig")
     .arg("eth0")
@@ -45,16 +40,15 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let address = format!("0.0.0.0:{}", port);
 
     println!("Server running on {}", address);
-    axum::Server::bind(&address.parse().unwrap())
+    axum::Server::bind(&address.parse()?)
         .serve(app.into_make_service())
-        .await
-        .unwrap();
+        .await?;
 
     Ok(())
 
 }
 
-fn is_port_available(port: u16) -> bool {
+fn _is_port_available(port: u16) -> bool {
     match std::net::TcpListener::bind(("0.0.0.0", port)) {
         Ok(_) => true,
         Err(_) => false,
